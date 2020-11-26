@@ -4,7 +4,7 @@
     <span class="example-spacer"></span>
     <button mat-menu-item mat-button [matMenuTriggerFor]="websitesMenu">{{selectedApp?selectedApp.name:'Websites'}}</button>
     <mat-menu #websitesMenu="matMenu" yPosition="above">
-        <button mat-menu-item *ngFor="let application of applications" (click)="redirectTo(application.id)">{{application.name}}</button>
+        <button mat-menu-item *ngFor="let application of listApplications" (click)="redirectTo(application.id)">{{application.name}}</button>
     </mat-menu>    
     <button mat-menu-item mat-button [matMenuTriggerFor]="languageMenu">Français</button>
     <mat-menu #languageMenu="matMenu" yPosition="above">

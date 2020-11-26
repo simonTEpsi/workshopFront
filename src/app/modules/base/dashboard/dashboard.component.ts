@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Sort } from '@angular/material/sort';
 import { ActivatedRoute } from '@angular/router';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { count } from 'console';
+import { PageService } from 'src/app/core/http/page/page.service';
 import { Page } from 'src/app/shared/models/page.model';
 
 @Component({
@@ -12,6 +15,9 @@ import { Page } from 'src/app/shared/models/page.model';
 
     pagesPertinence3: number;
 
+    listPages: Page[] = [];
+
+    sortedPages: Page[] = [];
     data1 = [
       {
         "name": "1",
@@ -161,25 +167,83 @@ import { Page } from 'src/app/shared/models/page.model';
 
     constructor(
       private route: ActivatedRoute,
+      public pageService: PageService
     ) {
       //Object.assign(this, { single });
      }
     
-      ngOnInit(): void {
-          console.log( this.route.snapshot.paramMap.get("idWebsite"));
-          this.pagesPertinence3 = this.data1.find((page) => page.name === '3').value;
-      }
+    ngOnInit(): void {
+        console.log( this.route.snapshot.paramMap.get("idWebsite"));
+        this.getPages(Number(this.route.snapshot.paramMap.get("idWebsite")));
+        //this.pagesPertinence3 = this.data1.find((page) => page.name === '3').value;
+    }
+
+    private getPages(idApp){
+      /*
+      this.pageService.getPages(idApp).subscribe((result) => {
+        result.forEach((page: Page) => {
+          this.listPages.push(
+            new Page(page.id, page.label, page.pertinence)
+          );
+        });
+        this.setDataGraph();
+      }); */
+      this.listPages = this.pages;
+      this.sortedPages = this.listPages.slice();
+      console.log(this.listPages);
+      this.setDataGraph();
+    }
+
+    setDataGraph() {
+      this.data1 = [
+        {
+          "name": "Pert. 1",
+          "value": this.listPages.filter(page => page.pertinence === 1).length
+        },
+        {
+          "name": "Pert. 2",
+          "value": this.listPages.filter(page => page.pertinence === 2).length
+        },
+        {
+          "name": "Pert. 3",
+          "value": this.listPages.filter(page => page.pertinence === 3).length
+        }
+      ]
+    }
+  
     
-      
-      onSelect(data): void {
-        console.log('Item clicked', JSON.parse(JSON.stringify(data)));
-      }
     
-      onActivate(data): void {
-        console.log('Activate', JSON.parse(JSON.stringify(data)));
+    onSelect(data): void {
+      console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+    }
+  
+    onActivate(data): void {
+      console.log('Activate', JSON.parse(JSON.stringify(data)));
+    }
+  
+    onDeactivate(data): void {
+      console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+    }
+
+    sortData(sort: Sort): void {
+      const data = this.listPages.slice();
+      if (!sort.active || sort.direction === '') {
+        this.sortedPages = data;
+        return;
       }
-    
-      onDeactivate(data): void {
-        console.log('Deactivate', JSON.parse(JSON.stringify(data)));
-      }
+      this.sortedPages = data.sort((a, b) => {
+        console.log(123)
+        const isAsc = sort.direction === 'asc';
+        switch (sort.active) {
+          case 'label': return this.compare(a.label, b.label, isAsc);
+          case 'pertinence': return this.compare(a.pertinence, b.pertinence, isAsc);
+          case 'icon': return this.compare(a.pertinence, b.pertinence, isAsc);
+          default: return 0;
+        }
+      });
+    }
+
+    public compare(a: number | string, b: number | string, isAsc: boolean) {
+      return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+    }
   }  

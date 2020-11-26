@@ -4,6 +4,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatListModule } from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import {MatTableModule} from '@angular/material/table';
       },
     ]),
     MatListModule,
+    MatSortModule,
     MatTableModule,
     SharedModule
   ],

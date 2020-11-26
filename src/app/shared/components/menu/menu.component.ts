@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Application } from '../../models/application.model';
 
 @Component({
     selector: 'app-menu',
@@ -7,19 +8,10 @@ import { ActivatedRoute, Router } from '@angular/router';
     styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
+    @Input() listApplications: Application[];
     idSelectedApp: number;
     
     selectedApp: any;
-
-    applications = [
-        {
-            'id': 1,
-            'name': 'Application 1'
-        }, {
-            'id': 2,
-            'name': 'Application 2'
-        },
-    ]
 
     constructor(
         private router: Router,
@@ -30,7 +22,7 @@ export class MenuComponent implements OnInit {
         this.router.routeReuseStrategy.shouldReuseRoute = () =>false;
         this.idSelectedApp = Number(window.location.href.split('/')[window.location.href.split('/').length-1]);
         this.setSelectedApp();
-        this.selectedApp = this.applications.find((app) => app.id === this.idSelectedApp);
+        this.selectedApp = this.listApplications.find((app) => app.id === this.idSelectedApp);
     }
 
     redirectTo(appId: number): void {
@@ -40,6 +32,6 @@ export class MenuComponent implements OnInit {
     }
 
     setSelectedApp(){
-        this.selectedApp = this.applications.find((app) => app.id === this.idSelectedApp);
+        this.selectedApp = this.listApplications.find((app) => app.id === this.idSelectedApp);
     }
 }

@@ -2,7 +2,7 @@
     <mat-grid-tile  [rowspan]="4">
         <mat-card>
             <mat-card-title>
-                <span>{{pagesPertinence3}}  pages non pertinentes</span>
+                <span>{{data1[2].value}}  pages non pertinentes</span>
             </mat-card-title>
             <mat-card-content>
 
@@ -32,25 +32,25 @@
             </mat-card-title>
             <div class="example-table-container">
 
-            <table mat-table [dataSource]="pages" class="mat-elevation-z8">
+            <table mat-table [dataSource]="sortedPages" class="mat-elevation-z8" matSort (matSortChange)="sortData($event)">
 
                 <!--- Note that these columns can be defined in any order.
                       The actual rendered columns are set as a property on the row definition" -->
               
                 <!-- Position Column -->
                 <ng-container matColumnDef="Label">
-                  <th mat-header-cell *matHeaderCellDef> Page </th>
+                  <th mat-header-cell mat-sort-header="label" *matHeaderCellDef> Page </th>
                   <td mat-cell *matCellDef="let page"> {{page.label}} </td>
                 </ng-container>
               
                 <!-- Name Column -->
                 <ng-container matColumnDef="Pertinence">
-                  <th mat-header-cell *matHeaderCellDef> Pertinence </th>
+                  <th mat-header-cell mat-sort-header="pertinence" *matHeaderCellDef> Pertinence </th>
                   <td mat-cell *matCellDef="let page"> {{page.pertinence}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="Icon">
-                    <th mat-header-cell *matHeaderCellDef> Etat </th>
+                    <th mat-header-cell mat-sort-header="icon" *matHeaderCellDef> Etat </th>
                     <td mat-cell *matCellDef="let page">
                         <mat-icon [ngClass]="page.pertinence===3?'warning':page.pertinence===2?'carefull':'fine'"
                         >
