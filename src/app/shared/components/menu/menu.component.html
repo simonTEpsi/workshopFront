@@ -1,0 +1,20 @@
+<mat-toolbar>
+    <mat-icon>whatshot</mat-icon>
+    <span>Workshop</span>
+    <span class="example-spacer"></span>
+    <button mat-menu-item mat-button [matMenuTriggerFor]="websitesMenu">{{selectedApp?selectedApp.name:'Websites'}}</button>
+    <mat-menu #websitesMenu="matMenu" yPosition="above">
+        <button mat-menu-item *ngFor="let application of applications" (click)="redirectTo(application.id)">{{application.name}}</button>
+    </mat-menu>    
+    <button mat-menu-item mat-button [matMenuTriggerFor]="languageMenu">Français</button>
+    <mat-menu #languageMenu="matMenu" yPosition="above">
+        <button mat-menu-item>Anglais</button>
+        <button mat-menu-item>Français</button>
+    </mat-menu>
+    <button mat-menu-item mat-button>
+        <mat-icon>settings</mat-icon>
+    </button>
+    <button mat-menu-item mat-button>
+        <mat-icon>login</mat-icon>
+    </button>
+</mat-toolbar>

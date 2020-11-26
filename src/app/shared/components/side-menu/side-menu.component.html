@@ -1,0 +1,13 @@
+<mat-card>
+    <mat-expansion-panel hideToggle *ngFor="let menuItem of menuItems">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <mat-icon>{{menuItem.icon}}</mat-icon>
+                {{menuItem.label}}
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-content class="subItem" *ngFor="let subItem of menuItem.subItems" routerLink="{{menuItem.subItems.redirect}}" routerLinkActive="{{menuItem.subItems.redirect}}">
+            {{subItem.label}}
+        </mat-content>
+    </mat-expansion-panel>
+</mat-card>

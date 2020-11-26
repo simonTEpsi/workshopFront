@@ -1,0 +1,43 @@
+mat-card {
+    width: 100%;
+    height: fit-content;
+    padding: 0px;
+}
+
+mat-expansion-panel {
+    box-shadow: none !important;
+}
+
+mat-expansion-panel-header {
+    padding-right: 0;
+}
+
+mat-expansion-panel-header {
+    padding-bottom: 0;
+}
+
+mat-panel-title{
+    font-size: 22px;
+    font-weight: 400;
+    mat-icon {
+        font-size: 20px;
+        margin-right: 10px;
+    }
+}
+
+mat-content {
+    display: block;
+    font-size: 14px;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+mat-icon {
+    color: #2E3F97;
+}
+
+.subItem {
+    cursor: pointer;
+    
+}

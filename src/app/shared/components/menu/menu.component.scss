@@ -1,0 +1,31 @@
+mat-toolbar {
+    //flex-direction: row-reverse;
+    //width: 100%;
+    height: fit-content;
+    background: #2E3F97;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.mat-menu-item {
+    width: fit-content !important;
+}
+
+.mat-menu-trigger {
+    color: white !important;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+mat-icon {
+    color: white !important;
+    margin: 0 !important;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+span {
+    margin-left: 20px;
+}
