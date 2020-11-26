@@ -16,9 +16,6 @@
                     [legendPosition]="'right'"
                     [labels]="true"
                     [doughnut]="false"
-                    (select)="onSelect($event)"
-                    (activate)="onActivate($event)"
-                    (deactivate)="onDeactivate($event)"
                 >
                 </ngx-charts-pie-chart>
             </mat-card-content>
@@ -101,9 +98,6 @@
                     [yAxisLabel]="false"
                     [timeline]="true"
                     [results]="data2"
-                    (select)="onSelect($event)"
-                    (activate)="onActivate($event)"
-                    (deactivate)="onDeactivate($event)"
                 >
                 </ngx-charts-line-chart>
             </mat-card-content>
